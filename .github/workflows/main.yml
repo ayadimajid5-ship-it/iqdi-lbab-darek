@@ -1,37 +1,32 @@
-name: Build APK
+name: إنشاء ملف APK
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
-      - master
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: جلب المشروع
         uses: actions/checkout@v4
 
-      - name: Setup Java
+      - name: إعداد Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-          cache: gradle
 
-      - name: Setup Android
-        uses: android-actions/setup-android@v3
+      - name: إعداد Gradle
+        uses: gradle/actions/setup-gradle@v4
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
+      - name: إنشاء APK
+        run: gradle assembleDebug
 
-      - name: Build APK
-        run: ./gradlew assembleDebug
-
-      - name: Upload APK
+      - name: رفع APK
         uses: actions/upload-artifact@v4
         with:
           name: iqdi-lbab-darek-apk
