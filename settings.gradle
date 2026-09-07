@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "iqdi-lbab-darek"
-include(":app")
+include(":برنامج")
